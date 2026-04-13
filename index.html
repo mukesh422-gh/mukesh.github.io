@@ -1,10 +1,889 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>My Portfolio</title>
-  </head>
-  <body>
-    <h1>Hello! I'm MUKESH KUMAR S</h1>
-    <p>My portfolio website is coming soon!</p>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mukesh Kumar S — Electronics & Embedded Systems Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --card: #151e2e;
+      --accent: #00d4ff;
+      --accent2: #ff6b35;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: rgba(0,212,255,0.15);
+      --glow: rgba(0,212,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* BACKGROUND GRID */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,14,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+      padding: 6rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .hero-inner { max-width: 800px; }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 0.3rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      animation: fadeDown 0.8s 0.2s ease both;
+      background: linear-gradient(135deg, #ffffff 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin-top: 1rem;
+      font-weight: 400;
+      animation: fadeDown 0.8s 0.4s ease both;
+      letter-spacing: 1px;
+    }
+
+    .hero-quote {
+      margin-top: 2rem;
+      font-style: italic;
+      color: rgba(226,232,240,0.5);
+      font-size: 0.95rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      text-align: left;
+      animation: fadeDown 0.8s 0.6s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      animation: fadeDown 0.8s 0.8s ease both;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      font-weight: 700;
+    }
+
+    .btn-primary:hover {
+      background: #fff;
+      box-shadow: 0 0 30px rgba(0,212,255,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--glow);
+    }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+      animation: fadeDown 0.8s 1s ease both;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 2.2rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 3rem;
+      line-height: 1.1;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+
+    .about-info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .about-info-item:last-child { border-bottom: none; }
+
+    .info-icon {
+      color: var(--accent);
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .info-label {
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      min-width: 80px;
+    }
+
+    .about-text p {
+      color: rgba(226,232,240,0.8);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    /* SKILLS */
+    #skills { background: none; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .skill-category:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .skill-cat-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: rgba(0,212,255,0.08);
+      color: var(--text);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      border: 1px solid rgba(0,212,255,0.2);
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* EXPERIENCE */
+    .exp-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .exp-card:hover { border-left-color: var(--accent2); }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .exp-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .exp-company {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 0.2rem;
+    }
+
+    .exp-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: rgba(0,212,255,0.08);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+    }
+
+    .exp-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .exp-list li {
+      padding: 0.35rem 0;
+      font-size: 0.88rem;
+      color: rgba(226,232,240,0.75);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .exp-list li::before {
+      content: '▸';
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .project-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .project-list {
+      list-style: none;
+    }
+
+    .project-list li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .project-list li::before {
+      content: '·';
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .edu-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .edu-degree {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .edu-school {
+      color: var(--accent);
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+    }
+
+    .edu-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    #contact {
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s;
+      min-width: 220px;
+    }
+
+    .contact-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,212,255,0.15);
+    }
+
+    .contact-icon { font-size: 1.5rem; }
+
+    .contact-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-family: 'Space Mono', monospace;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 700px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .exp-header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">MK.DEV</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">⚡ Electronics & Embedded Systems Engineer</div>
+      <h1 class="hero-name">Mukesh Kumar S</h1>
+      <p class="hero-title">PCB Design · Embedded Systems · IoT Development · Chennai, Tamil Nadu</p>
+      <blockquote class="hero-quote">
+        "To work in a challenging environment where I can apply my knowledge in electronics, embedded systems, and automation — while continuously learning and contributing to organizational growth."
+      </blockquote>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+        <a href="#projects" class="btn btn-outline">View Projects</a>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">1+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2</div>
+          <div class="stat-label">IoT Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Tech Skills</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Problems to Solve</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="fade-in">
+    <div class="section-label">// who I am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-info-item">
+          <span class="info-icon">📍</span>
+          <span class="info-label">Location</span>
+          <span>Chennai, Tamil Nadu</span>
+        </div>
+        <div class="about-info-item">
+          <span class="info-icon">📞</span>
+          <span class="info-label">Phone</span>
+          <span>93458 61858</span>
+        </div>
+        <div class="about-info-item">
+          <span class="info-icon">📧</span>
+          <span class="info-label">Email</span>
+          <span style="font-size:0.82rem">mk0998347@gmail.com</span>
+        </div>
+        <div class="about-info-item">
+          <span class="info-icon">🔗</span>
+          <span class="info-label">LinkedIn</span>
+          <a href="https://www.linkedin.com/in/mukeshkumar422" target="_blank" style="color:var(--accent);font-size:0.82rem">mukeshkumar422</a>
+        </div>
+        <div class="about-info-item">
+          <span class="info-icon">🎖️</span>
+          <span class="info-label">NCC</span>
+          <span>Under Officer</span>
+        </div>
+        <div class="about-info-item">
+          <span class="info-icon">🌐</span>
+          <span class="info-label">Languages</span>
+          <span>English · Tamil · Malayalam</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>
+          I'm a dedicated <strong style="color:var(--accent)">Electronics & Communication Engineer</strong> with hands-on experience in PCB design, embedded systems, and microcontroller programming.
+        </p>
+        <p>
+          Currently working as a <strong style="color:var(--accent)">Customer Support Engineer at VI Microsystems Pvt. Ltd.</strong>, I bring strong exposure to schematic design, circuit simulation, and embedded hardware debugging.
+        </p>
+        <p>
+          I possess solid knowledge in C, C++, IoT systems, and sensor integration, and I'm actively seeking challenging roles in <strong style="color:var(--accent2)">Electrical Maintenance / PLC / Embedded Systems</strong>.
+        </p>
+        <p>
+          Beyond engineering, I'm a quick learner, effective communicator, and a team player — values shaped through NCC training and leadership programs.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills" class="fade-in">
+    <div class="section-label">// what I know</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-category">
+        <div class="skill-cat-title">⚙️ Core Engineering</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Embedded Systems</span>
+          <span class="skill-tag">PCB Design</span>
+          <span class="skill-tag">PCB Layout</span>
+          <span class="skill-tag">Microcontroller Programming</span>
+          <span class="skill-tag">IoT Development</span>
+          <span class="skill-tag">Circuit Design</span>
+          <span class="skill-tag">Circuit Simulation</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">💻 Programming Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Basic Java</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🔧 Hardware Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">ESP32</span>
+          <span class="skill-tag">Microcontroller Systems</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🛠️ Software & Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">MATLAB</span>
+          <span class="skill-tag">PCB Design Software</span>
+          <span class="skill-tag">Circuit Simulation Tools</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">🌟 Soft Skills</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Problem Solving</span>
+          <span class="skill-tag">Leadership</span>
+          <span class="skill-tag">Communication</span>
+          <span class="skill-tag">Market Analysis</span>
+          <span class="skill-tag">Teamwork</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-title">📜 Certifications</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Machine Learning (Fundamentals)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="fade-in">
+    <div class="section-label">// where I've worked</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Customer Support Engineer</div>
+          <div class="exp-company">VI Microsystems Pvt. Ltd. — Chennai</div>
+        </div>
+        <div class="exp-date">June 2024 – Present</div>
+      </div>
+      <ul class="exp-list">
+        <li>Designed and developed PCB schematics for embedded applications</li>
+        <li>Performed single-layer and double-layer PCB routing</li>
+        <li>Conducted circuit simulations and analyzed performance</li>
+        <li>Carried out embedded hardware testing and debugging</li>
+        <li>Supported R&D team in prototype design and validation</li>
+        <li>Worked on microcontroller-based systems for industrial and educational use</li>
+        <li>Assisted in sensor integration and embedded software testing</li>
+        <li>Provided technical support and troubleshooting for hardware-related issues</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-in">
+    <div class="section-label">// what I've built</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🌱</div>
+        <div class="project-title">IoT-Based Automated Hydroponics Indoor Plant Cultivation System</div>
+        <ul class="project-list">
+          <li>Smart hydroponics system using Arduino Mega</li>
+          <li>Monitored Temperature, Humidity, pH & Nutrient levels</li>
+          <li>Real-time monitoring and automation</li>
+          <li>IoT communication for remote access & control</li>
+          <li>Energy-efficient hardware architecture</li>
+          <li>Mobile interface for user interaction</li>
+        </ul>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">⚡</div>
+        <div class="project-title">IoT-Based Smart Energy Monitoring System</div>
+        <ul class="project-list">
+          <li>Monitored voltage, current, and power consumption</li>
+          <li>Calculated real-time energy usage in kWh</li>
+          <li>Integrated IoT dashboard for remote monitoring</li>
+          <li>Improved energy efficiency through data analysis</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education" class="fade-in">
+    <div class="section-label">// where I studied</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Engineering — Electronics & Communication Engineering</div>
+        <div class="edu-school">St. Xavier's Catholic College of Engineering</div>
+        <div class="edu-date">Aug 2020 – May 2024</div>
+        <p style="margin-top:0.8rem;font-size:0.88rem;color:var(--muted)">
+          Strong foundation in electronics and communication systems. Focused on practical and application-based learning. Completed final year project on IoT automation system.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="fade-in">
+    <div class="section-label">// get in touch</div>
+    <h2 class="section-title">Contact Me</h2>
+    <p style="color:var(--muted);margin-top:-1.5rem;margin-bottom:2rem;font-size:0.95rem">
+      Open to opportunities in Embedded Systems, PLC, and Electrical Maintenance.
+    </p>
+    <div class="contact-grid">
+      <a href="tel:9345861858" class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">93458 61858</div>
+        </div>
+      </a>
+      <a href="mailto:mk0998347@gmail.com" class="contact-item">
+        <span class="contact-icon">📧</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">mk0998347@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/mukeshkumar422" target="_blank" class="contact-item">
+        <span class="contact-icon">🔗</span>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">mukeshkumar422</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Mukesh Kumar S · Built with passion for Electronics & Embedded Systems</p>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
 </html>
